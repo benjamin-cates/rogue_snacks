@@ -131,9 +131,9 @@ function summon_soda(k: KAPLAYCtx, health: number): GameObj<HealthComp> {
                 soda.play("fizz");
                 let rand_num = Math.floor(Math.random() * 3.5);
                 for (let i = 0; i < rand_num; i++) {
-                    setTimeout(() => {
+                    soda.wait(0.3 + i * 0.2 + Math.random() * 0.05, () => {
                         summon_soda_particle(k, k.vec2(soda.pos.x + 48 - 16, soda.pos.y));
-                    }, 300 + i * 200 + Math.random() * 50);
+                    });
                 }
                 // Shoot drops
             }
@@ -198,9 +198,9 @@ function summon_popcorn(k: KAPLAYCtx, health: number): GameObj<HealthComp> {
                 popcorn.play("pop");
                 let rand_num = Math.floor(Math.random() * 3);
                 for (let i = 0; i < rand_num; i++) {
-                    setTimeout(() => {
+                    popcorn.wait(0.5 + i * 0.3 + Math.random() * 0.08, () => {
                         summon_popcorn_particle(k, k.vec2(popcorn.pos.x + 48, popcorn.pos.y + 64));
-                    }, 500 + i * 300 + Math.random() * 80);
+                    });
                 }
                 // Shoot drops
             }
