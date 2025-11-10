@@ -193,6 +193,8 @@ function add_player(k: KAPLAYCtx) {
     let a_time: number | undefined;
     let a_off_time: number | undefined;
     player.onKeyDown("a", () => {
+        d_time = undefined;
+        d_off_time = undefined;
         if (player.getCurAnim()?.name != "walk_left") player.play("walk_left");
         if (player.health > 0 && a_off_time && a_off_time > k.time() - 0.15) {
             player.dash_left(player.speed_multiplier);
@@ -217,6 +219,8 @@ function add_player(k: KAPLAYCtx) {
     let d_time: number | undefined;
     let d_off_time: number | undefined;
     player.onKeyDown("d", () => {
+        a_time = undefined;
+        a_off_time = undefined;
         if (player.getCurAnim()?.name != "walk_right") player.play("walk_right");
         if (player.health > 0 && d_off_time && d_off_time > k.time() - 0.15) {
             player.dash_right(player.speed_multiplier);
