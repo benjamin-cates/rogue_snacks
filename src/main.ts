@@ -14,6 +14,7 @@ k.loadRoot("./"); // A good idea for Itch.io publishing later
 
 add_sprites(k);
 add_sounds(k);
+k.setVolume(0.8);
 
 k.scene("game", () => {
     let stadium = k.add([
