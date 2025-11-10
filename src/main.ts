@@ -97,6 +97,8 @@ k.scene("game", () => {
             k.get("player")[0].combo_timer_enabled = false;
             await sleep(1000);
             await new Promise(resolve => {
+                // Skip card picking on first round
+                if (arena_id == 1) return resolve(0);
                 text.text = "Choose a Card";
                 let options = [
                     "card_heal_half_health",
