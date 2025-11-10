@@ -48,9 +48,25 @@ function add_player(k: KAPLAYCtx) {
             combo: 1,
             combo_timer: 0,
             combo_timer_enabled: false,
+            add_points_text(points: number) {
+                let starting_y = player.pos.y - 20;
+                let text = k.add([
+                    k.text("+" + points, { size: 20 }),
+                    k.timer(),
+                    k.color(255, 255, 255),
+                    k.pos(player.pos.x + 13, starting_y),
+                    k.opacity(1),
+                ]);
+                text.tween(0 as number, 1, 0.8, v => {
+                    text.pos.y = starting_y - 100 * v;
+                    text.opacity = Math.min(2 - 2 * v, 1);
+                })
+                text.wait(1, () => text.destroy());
+            },
             register_kill() {
                 k.play("point");
                 if (player.health <= 0) return;
+                player.add_points_text(player.combo);
                 player.score += player.combo;
                 score_text.text = "Score: " + player.score.toString().padStart(5, "0");
                 player.combo_timer = 100;
@@ -60,6 +76,7 @@ function add_player(k: KAPLAYCtx) {
             baseball_hit() {
                 k.play("point");
                 if (player.health <= 0) return;
+                player.add_points_text(player.combo * 10);
                 player.score += player.combo * 10;
                 score_text.text = "Score: " + player.score.toString().padStart(5, "0");
                 player.combo_timer = 100;
