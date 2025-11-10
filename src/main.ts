@@ -41,34 +41,16 @@ k.scene("game", () => {
                 }
                 k.go("game");
             });
-            let input_background = k.add([
-                k.pos(960 * 2 / 3 + 70, 540 / 2),
-                k.rect(60, 30),
-                k.color(255, 255, 255),
-            ])
-            let text_initials = k.add([
-                k.text("Initials (3):", { width: 300, align: "center", size: 30 }),
-                k.pos(960 * 2 / 3 - 190, 540 / 2),
-                k.color(255, 255, 255),
-            ])
-            let text_box = input_background.add([
-                k.pos(0, 0),
-                k.text("", { align: "center", width: 60, size: 30, font: "monospace" }),
-                k.textInput(true, 3),
-                k.color(0, 0, 0)
-            ]);
             let button = k_sprite_button(k, 960 * 2 / 3, 540 / 2 + 60, "Add Score", () => {
-                console.log("Pushing buttons");
-                if (text_box.text.length != 3) {
+                let name = prompt("Please enter three letter initials");
+                if (!name || name.length != 3) {
                     alert("Name must be three characters");
                     return;
                 }
                 else {
                     button.destroy();
-                    text_initials.destroy();
-                    input_background.destroy();
                     let score = (k.get("player")[0]).score;
-                    push_score(text_box.text, score);
+                    push_score(name, score);
                     leaderboard = add_leaderboard(k);
                 }
             });
